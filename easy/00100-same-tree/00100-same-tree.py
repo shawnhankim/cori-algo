@@ -34,11 +34,15 @@ Input:     1         1
 Output: false
 """
 
+from collections import deque
+
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
         self.left = None
         self.right = None
+
 
 class Solution(object):
     def is_sametree(self, p, q):
@@ -53,70 +57,98 @@ class Solution(object):
             return False
         return self.is_sametree(p.left, q.left) and self.is_sametree(p.right, q.right)
 
+
     def string_to_treenode(self, inputs):
-        input = input.strip()
-        input = input[1:-1]
+        input = inputs.strip()
+        inputs = input[1:-1]
         if not input:
             return None
 
-        inputs = [s.strip() for s in input.split(',')]
-        root = TreeNode(int(inputs[0]))
-        node_q = [root]
-        front = 0
-        idx   = 1
-        while idx < len(inputs):
-            node = node_q[front]
-            front += 1
+        toggle = 0
+        nums = [s.strip() for s in inputs.split(',')]
+        q = deque()
+        root = TreeNode(int(nums[0]))
+        q.append(root)
 
-            item = inputs[idx]
-            idx += 1
-            if item != "null":
-                left_num = int(item)
-                node.left = TreeNode(left_num)
-                node_q.append(node.left)
+        i = 1
+        cnt = len(nums)
+        while i < cnt:
+            node = q.popleft()
 
-            if idx >= len(inputs):
-                break
+            for j in range(2):
+                if nums[i] != "null":
+                    new_node = TreeNode(int(nums[i]))
+                    q.append(new_node)
+                    if j == 0:
+                        node.left = new_node
+                    else: 
+                        node.right = new_node
+                i += 1
+                if i >= cnt:
+                    break
+        return root        
 
-            item = inputs[idx]
-            idx += 1
-            if item != "null":
-                right_num = int(item)
-                node.right = TreeNode(right_num)
-                node_q.append(node.right)
-        return root
-    
-    def list_to_treenode(self, inputs):
-        from collections import deque
-        root = TreeNode(inputs[0])
+
+    def list_to_treenode(self, nums):
+        if not nums:
+            return None
+
+        root = TreeNode(nums[0])
         q = deque()
         q.append(root)
         toggle = 0
-        cnt = len(inputs)
-        for num in inputs:
+
+        i = 1
+        cnt = len(nums)
+        while i < cnt:
             node = q.popleft()
-            new_node = TreeNode(num)
-            if not toggle:
-                node.left = new_node
-            else:
-                node.right = new_node
-            toggle ^= 1
-            q.append(new_node)
+
+            for j in range(2):
+                if nums[i] != None:
+                    new_node = TreeNode(nums[i])
+                    q.append(new_node)
+                    if j == 0:
+                        node.left = new_node
+                    else: 
+                        node.right = new_node
+                i += 1
+                if i >= cnt:
+                    break
         return root
 
-def main():
+def test_int_nums():
     test_cases = [
-        { "p": [1,2,3], "q": [1,2,3] },
-        { "p": [1,2],   "q": [1,None,2] },
-        { "p": [1,2,1], "q": [1,1,2] }
+        { "p": [1,2,3]       , "q": [1,2,3] },
+        { "p": [1,2]         , "q": [1,None,2] },
+        { "p": [1,2,1]       , "q": [1,1,2] },
+        { "p": [1,2,5,6,9,10], "q": [1,2,5,6,9,10]}
     ]
     sol = Solution()
+    print("\n ------ [Test Int Numbers] -----")
     for i, test_case in enumerate(test_cases, 1):
         p = sol.list_to_treenode(test_case["p"])
         q = sol.list_to_treenode(test_case["q"])
         res = sol.is_sametree(p, q)
         print(f"{i}. {test_case} are same tree : {res}")
 
+def test_string_nums():
+    test_cases = [
+        { "p": "[1,2,3]"       , "q": "[1,2,3]" },
+        { "p": "[1,2]"         , "q": "[1,null,2]" },
+        { "p": "[1,2,1]"       , "q": "[1,1,2]" },
+        { "p": "[1,2,5,6,9,10]", "q": "[1,2,5,6,9,10]"}
+    ]
+    sol = Solution()
+    print("\n\n ----- [Test String Numbers] -----")
+    for i, test_case in enumerate(test_cases, 1):
+        p = sol.string_to_treenode(test_case["p"])
+        q = sol.string_to_treenode(test_case["q"])
+        res = sol.is_sametree(p, q)
+        print(f"{i}. {test_case} are same tree : {res}")
+
+
 if __name__ == '__main__':
-    main()
+    test_int_nums()
+    test_string_nums()
+
 

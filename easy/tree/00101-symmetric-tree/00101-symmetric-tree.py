@@ -43,6 +43,23 @@ class Solution(object):
         if not root:
             return True
         q = deque()
+        q.append((root.left, root.right))
+        while q:
+            l, r = q.popleft()
+            if not l and not r:
+                continue
+            elif not l or not r or (l and r and l.val != r.val):
+                return False
+            else:
+                q.append((l.left, r.right))
+                q.append((l.right, r.left))
+        return True
+
+class Solution2(object):
+    def is_symmetric(self, root):
+        if not root:
+            return True
+        q = deque()
         q.append(root.left)
         q.append(root.right)
         res = True

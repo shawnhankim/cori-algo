@@ -20,6 +20,11 @@ But the following [1,2,2,null,3,null,3] is not:
    \   \
    3    3
  
+    
+        1
+     2     2
+   3  4   4  3
+ 4 5 6 7 7 6 5 4   
 
 Note:
 Bonus points if you could solve it both recursively and iteratively.
@@ -32,7 +37,34 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# Iterative Solution
 class Solution(object):
+    def is_symmetric(self, root):
+        if not root:
+            return True
+        q = deque()
+        q.append(root.left)
+        q.append(root.right)
+        res = True
+        while q:
+            l = q.popleft()
+            r = q.popleft()
+            if (not l and r) or (l and not r) or (l and r and l.val != r.val):
+                res = False
+                break
+            if l:
+                q.append(l.left)
+                q.append(r.right)
+            if r:
+                q.append(l.right)
+                q.append(r.left) 
+               
+        while q:
+            q.pop()
+        return res
+
+# Recursive Solution
+class Solution1(object):
     def is_symmetric(self, root):
         if not root:
             return True
@@ -53,7 +85,9 @@ class Test(object):
             [1, 2, 2, 3, 4, 4, 3],
             [1, 2, 2, None, 3, None, 3],
             [1],
-            [1, 2]
+            [1, 2],
+            [1, 2, 2, 3, 4, 4, 3, 4, 5, 6, 7, 7, 6, 5, 4],
+            [1, 2, 2, 3, 4, 4, 3, 4, 5, 6, 7, 7, 6, 3, 4]
         ]
         for i, test_case in enumerate(test_cases, 1):
             root = self.list_to_tree(test_case)

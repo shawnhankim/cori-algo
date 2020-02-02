@@ -1,6 +1,14 @@
 """
 Convert decimal to larger bases
 
+[Expected Result]
+-----------------
+1. num:31, base:16, res:1F
+2. num:10, base:16, res:A
+3. num:15, base:16, res:F
+4. num:16, base:16, res:10
+5. num:81, base:16, res:51
+
 """
 
 def convert_decimal_to_larger_bases(num, base):

@@ -1,0 +1,19 @@
+class Solution(object):
+    def levelOrderBottom(self, root):
+	
+        if not root:
+            return []
+        
+        q = collections.deque([(root, 0)])
+        h = collections.defaultdict(list)
+        
+        while q:
+            node, lev = q.popleft()
+            
+            if node:
+                h[lev].append(node.val)
+                q.append((node.left, lev+1))
+                q.append((node.right, lev+1))
+        
+        return h.values()[::-1]
+

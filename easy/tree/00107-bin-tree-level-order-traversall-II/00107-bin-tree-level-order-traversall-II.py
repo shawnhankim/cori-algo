@@ -21,7 +21,7 @@ return its bottom-up level order traversal as:
 
 """
 
-from collections import deque
+from collections import deque, defaultdict
 
 class Tree(object):
     def __init__(self, x):
@@ -31,6 +31,29 @@ class Tree(object):
 
 class Solution(object):
     def level_order_bottom(self, root):
+        if not root:
+            return None
+
+        q = deque()
+        d = defaultdict(list)
+        depth = 0
+        q.append((root, depth))
+       
+        while q:
+            node, depth = q.popleft()
+            d[depth].append(node.val)
+
+            if node.left:
+                q.append((node.left, depth+1))
+            if node.right:
+                q.append((node.right, depth+1))
+
+        res = []
+        for key, value in d.items():
+            res.append(value)
+        return res[::-1]
+
+    def level_order_bottom1(self, root):
         if not root:
             return None
 

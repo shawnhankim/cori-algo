@@ -35,6 +35,28 @@ class Solution(object):
             return None
 
         q = deque()
+        q.append(root)
+        res = []
+
+        while q:
+            temp = []
+            node_cnt = len(q)
+            while node_cnt > 0:
+                node = q.popleft()
+                temp.append(node.val)
+                if node.left:
+                   q.append(node.left)
+                if node.right:
+                   q.append(node.right)
+                node_cnt -= 1
+            res.append(temp)
+        return res[::-1]
+
+    def level_order_bottom2(self, root):
+        if not root:
+            return None
+
+        q = deque()
         d = defaultdict(list)
         depth = 0
         q.append((root, depth))

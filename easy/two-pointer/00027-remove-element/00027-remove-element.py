@@ -58,7 +58,21 @@ class Solution(object):
             nums[res] = num
             res += 1
         return res
+    
+    def remove_duplicates2(self, nums, val):
+        if not nums:
+            return 0
         
+        i = 0
+        cnt = len(nums)
+        while i < cnt:
+            if nums[i] == val:
+                nums.pop(i)
+                cnt -= 1
+            else:
+                i += 1
+        return cnt
+    
     def test(self):
         test_cases = [
             {"nums": [3,2,2,3], "val": 3},
@@ -67,7 +81,7 @@ class Solution(object):
         for i, test_case in enumerate(test_cases, 1):
             nums = test_case['nums']
             val  = test_case['val']
-            res = self.remove_duplicates(nums, val)
+            res = self.remove_duplicates2(nums, val)
             print(f"{i}. len:{res}, nums:{nums}")
 
 def main():

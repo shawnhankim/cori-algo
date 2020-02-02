@@ -25,6 +25,14 @@ def convert_to_decimal(num, base):
         num //= 10
     return res    
 
+def convert_to_decimal1(num, base):
+    multiplier, res = 1, 0
+    while num > 0:
+        res += num % 10 * multiplier
+        multiplier *= base
+        num //=10
+    return res
+
 def test():
     test_cases = [
         {"num": 1001  , "base": 2},
@@ -36,7 +44,7 @@ def test():
     for i, test_case in enumerate(test_cases, 1):
         num  = test_case['num']
         base = test_case['base']
-        res  = convert_to_decimal(num, base)
+        res  = convert_to_decimal1(num, base)
         print(f"{i}. res:%4d <- num:%064d, base:{base}" % (res, num))
 
 if __name__ == '__main__':

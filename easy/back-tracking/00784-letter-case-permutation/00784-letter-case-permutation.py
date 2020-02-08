@@ -17,13 +17,19 @@ Note:
 S will be a string with length between 1 and 12.
 S will consist only of letters or digits.
 
+Expected Result:
+1. a1b2       -> ['a1b2', 'a1B2', 'A1b2', 'A1B2'], ['a1b2', 'A1b2', 'a1B2', 'A1B2']
+2. 3z4        -> ['3z4', '3Z4'], ['3z4', '3Z4']
+3. 12345      -> ['12345'], ['12345']
+4.            -> [], ['']
+
 """
 
 class Solution(object):
     def letter_case_permutation1(self, S):
-        res = [""]
+        res = []
         if not S: return res
-        return self.helper(S, res, len(S))
+        return self.helper2(S, res, len(S))
 
  
     def helper(self, S, res, n, k=0, ele=""):
@@ -42,6 +48,18 @@ class Solution(object):
             ele += alpha
             res = self.helper(S, res, n, k+1, ele)
             ele = ele[:-1]
+        return res
+
+
+    def helper2(self, S, res, n, k=0, ele=""):
+        if k == n:
+            res.append(ele)
+            return res
+        if S[k].isalpha():
+            res = self.helper2(S, res, n, k+1, ele+S[k].lower())
+            res = self.helper2(S, res, n, k+1, ele+S[k].upper())
+        else:
+            res = self.helper2(S, res, n, k+1, ele+S[k])
         return res
 
 

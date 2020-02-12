@@ -30,9 +30,7 @@ class Solution(object):
                 node.next = l2
                 l2 = l2.next
             node = node.next
-        if l1: node.next = l1
-        if l2: node.next = l2
-
+        node.next = l1 if l1 else l2
         return head.next
 
 

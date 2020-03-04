@@ -16,8 +16,12 @@ Expected Results:
    - bubble sort result, O(6 * 6) -> [3, 4, 9, 11, 28, 43]
 
    ----- optimized bubble sort -----
+   - [11, 3, 28, 43, 9, 4]
+   - [3, 11, 28, 9, 4, 43]
+   - [3, 11, 9, 4, 28, 43]
+   - [3, 9, 4, 11, 28, 43]
    - [3, 4, 9, 11, 28, 43]
-   - bubble sort result, O(1 * 1) -> [3, 4, 9, 11, 28, 43]
+   - bubble sort result, O(5 * 5) -> [3, 4, 9, 11, 28, 43]
 
    ----- compare bubble sort vs. sorted() -----
    - sorted(l) == bubble_sort(l) -> True
@@ -37,8 +41,11 @@ Expected Results:
    - bubble sort result, O(10 * 10) -> [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
 
    ----- optimized bubble sort -----
+   - [4, 5, 2, 1, 6, 2, 7, 10, 13, 8]
+   - [4, 2, 1, 5, 2, 6, 7, 10, 8, 13]
+   - [2, 1, 4, 2, 5, 6, 7, 8, 10, 13]
    - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
-   - bubble sort result, O(1 * 1) -> [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
+   - bubble sort result, O(4 * 4) -> [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
 
    ----- compare bubble sort vs. sorted() -----
    - sorted(l) == bubble_sort(l) -> True
@@ -70,8 +77,9 @@ Expected Results:
    - bubble sort result, O(2 * 2) -> [3, 5]
 
    ----- optimized bubble sort -----
+   - [5, 3]
    - [3, 5]
-   - bubble sort result, O(1 * 1) -> [3, 5]
+   - bubble sort result, O(2 * 2) -> [3, 5]
 
    ----- compare bubble sort vs. sorted() -----
    - sorted(l) == bubble_sort(l) -> True
@@ -84,8 +92,10 @@ Expected Results:
    - bubble sort result, O(3 * 3) -> [2, 5, 10]
 
    ----- optimized bubble sort -----
+   - [5, 10, 2]
+   - [5, 2, 10]
    - [2, 5, 10]
-   - bubble sort result, O(1 * 1) -> [2, 5, 10]
+   - bubble sort result, O(3 * 3) -> [2, 5, 10]
 
    ----- compare bubble sort vs. sorted() -----
    - sorted(l) == bubble_sort(l) -> True
@@ -99,13 +109,16 @@ Expected Results:
    - bubble sort result, O(4 * 4) -> [1, 2, 3, 4]
 
    ----- optimized bubble sort -----
+   - [1, 2, 4, 3]
    - [1, 2, 3, 4]
-   - bubble sort result, O(1 * 1) -> [1, 2, 3, 4]
+   - bubble sort result, O(2 * 2) -> [1, 2, 3, 4]
 
    ----- compare bubble sort vs. sorted() -----
    - sorted(l) == bubble_sort(l) -> True
 
 """
+
+import copy
 
 def bubble_sort1(l):
     n, o_n = len(l), 0
@@ -151,11 +164,11 @@ def test():
 
         print(f"\n{i}. Test Case : {l}")
         print(f"   ----- general bubble sort : O(N^2) -----")
-        res1, o_n = bubble_sort1(l)
+        res1, o_n = bubble_sort1(copy.deepcopy(l))
         print(f"   - bubble sort result, O({o_n} * {o_n}) -> {res1}")
 
         print( "\n   ----- optimized bubble sort -----")
-        res2, o_n = bubble_sort2(l)
+        res2, o_n = bubble_sort2(copy.deepcopy(l))
         print(f"   - bubble sort result, O({o_n} * {o_n}) -> {res1}")
 
         print( "\n   ----- compare bubble sort vs. sorted() -----")

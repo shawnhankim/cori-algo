@@ -6,10 +6,26 @@ Time Complexity: O(N^2)
 Expected Results:
 
 1. Test Case : [11, 3, 28, 43, 9, 4]
+   - [11, 3, 28, 43, 9, 4]
+   - [3, 11, 28, 9, 4, 43]
+   - [3, 11, 9, 4, 28, 43]
+   - [3, 9, 4, 11, 28, 43]
+   - [3, 4, 9, 11, 28, 43]
+   - [3, 4, 9, 11, 28, 43]
    - sorted(l) == bubble_sort(l) -> True
    - bubble sort result -> [3, 4, 9, 11, 28, 43]
 
 2. Test Case : [4, 5, 2, 1, 6, 2, 7, 10, 13, 8]
+   - [4, 5, 2, 1, 6, 2, 7, 10, 13, 8]
+   - [4, 2, 1, 5, 2, 6, 7, 10, 8, 13]
+   - [2, 1, 4, 2, 5, 6, 7, 8, 10, 13]
+   - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
+   - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
+   - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
+   - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
+   - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
+   - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
+   - [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
    - sorted(l) == bubble_sort(l) -> True
    - bubble sort result -> [1, 2, 2, 4, 5, 6, 7, 8, 10, 13]
 
@@ -22,10 +38,15 @@ Expected Results:
    - bubble sort result -> [2]
 
 5. Test Case : [5, 3]
+   - [5, 3]
+   - [3, 5]
    - sorted(l) == bubble_sort(l) -> True
    - bubble sort result -> [3, 5]
 
 6. Test Case : [5, 10, 2]
+   - [5, 10, 2]
+   - [5, 2, 10]
+   - [2, 5, 10]
    - sorted(l) == bubble_sort(l) -> True
    - bubble sort result -> [2, 5, 10]
 
@@ -36,6 +57,7 @@ def bubble_sort(l):
     if n <= 1: return l
 
     for k in range(n-1, -1, -1):
+        print(f"   - {l}")
         for i in range(k):
             if l[i] > l[i+1]: 
                 l[i], l[i+1] = l[i+1], l[i]

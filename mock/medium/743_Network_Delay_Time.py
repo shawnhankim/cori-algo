@@ -182,41 +182,7 @@ import heapq
 from collections import defaultdict
 
 class Solution:
-    def network_delay_time2(self, times, N, K):
-        # Create graph
-        g, q, dist, visited = {}, [], {}, {}
-        for u, v, w in times:
-            if u not in g: g[u] = {}
-            if v not in g: g[v] = {}
-            g[u][v] = w
-            dist[u] = dist[v] = float('inf')
-            visited[u] = visited[v] = False
-        dist[K] = 0
 
-        # Algorithm
-        res = -1
-        q.append(K)
-        while q:
-            u = q.pop()
-            if visited[u]: continue
-            if u not in g:
-                visited[u] = True
-                continue
-
-            for v in g[u].keys():
-                w = g[u][v]
-                d = dist[u] + w
-                dist[v] = min(dist[v], d) 
-                q.append(v)
-            visited[u] = True
-
-        self.print_graph(g, dist, visited)
-        for u in visited.keys():
-            if not visited[u]: return -1
-        for d in dist.keys():
-            res = max(res, dist[d])
-        return res
- 
     def network_delay_time_heap(self, times, N, K):
         pq = [(0, K)]
         g, dist = defaultdict(dict), [float('inf')] * (N+1)

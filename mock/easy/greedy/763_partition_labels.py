@@ -21,20 +21,20 @@ Expected Results:
 1. Test Case: ababcbacadefegdehijhklij
    - Result 1 : [9, 7, 8]
    - Result 2 : [9, 7, 8]
-   - Result 3 : [1]
-   - Assert res1 == res2 == res3 : False
+   - Result 3 : [9, 7, 8]
+   - Assert res1 == res2 == res3 : True
 
 2. Test Case: aabbaccd
    - Result 1 : [5, 2, 1]
    - Result 2 : [5, 2, 1]
-   - Result 3 : [1]
-   - Assert res1 == res2 == res3 : False
+   - Result 3 : [5, 2, 1]
+   - Assert res1 == res2 == res3 : True
 
 3. Test Case: aabbbccd
    - Result 1 : [2, 3, 2, 1]
    - Result 2 : [2, 3, 2, 1]
-   - Result 3 : [1]
-   - Assert res1 == res2 == res3 : False
+   - Result 3 : [2, 3, 2, 1]
+   - Assert res1 == res2 == res3 : True
 
 4. Test Case:
    - Result 1 : []
@@ -51,8 +51,8 @@ Expected Results:
 6. Test Case: ab
    - Result 1 : [1, 1]
    - Result 2 : [1, 1]
-   - Result 3 : [1]
-   - Assert res1 == res2 == res3 : False
+   - Result 3 : [1, 1]
+   - Assert res1 == res2 == res3 : True
 
 """
 
@@ -88,11 +88,11 @@ class Solution:
         res, hs_idx, hs, max_idx, prev_idx = [], {}, {}, 0, 0
 
         for i, c in enumerate(S):
-            hs[c] = i
+            hs_idx[c] = i
         for i, c in enumerate(S):
             if c not in hs:
                 hs[c] = 1
-                max_idx = hs_idx[c]
+                max_idx = max(max_idx, hs_idx[c])
             if i == max_idx:
                 len_partition = i+1 if len(res) == 0 else i-prev_idx
                 res.append(len_partition)

@@ -16,6 +16,10 @@ Note:
 S will have length in range [1, 500].
 S will consist of lowercase letters ('a' to 'z') only.
 
+Complexity Analysis:
+- Time  Complexity: O(N)
+- Space Complexity: O(N)
+
 Expected Results:
 
 1. Test Case: ababcbacadefegdehijhklij

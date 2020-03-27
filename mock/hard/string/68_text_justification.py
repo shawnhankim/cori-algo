@@ -279,35 +279,3 @@ class Solution:
 if __name__ == '__main__':
     Solution().test()
 
-
-"""
-Test Cases:
-
-["This", "is", "an", "example", "of", "text", "justification."]
-16
-["What","must","be","acknowledgment","shall","be"]
-16
-["Science","is","what","we","understand","well","enough","to","explain","to","a","computer.","Art","is","everything","else","we","do"]
-20
-["ask","not","what","your","country","can","do","for","you","ask","what","you","can","do","for","your","country"]
-16
-
-Output:
-
-["This    is    an","example  of text","justification.  "]
-["What   must   be","acknowledgment  ","shall be        "]
-["Science is what  we","understand0well","enough to explain to","a computer. Art  is","everything  else  we","do                  "]
-["ask   not   what","your country can","do  for  you ask","what you can do","for your country"]
-
-Expectaion:
-
-["This    is    an","example  of text","justification.  "]
-["What   must   be","acknowledgment  ","shall be        "]
-["Science  is  what we","understand      well","enough to explain to","a  computer.  Art is","everything  else  we","do                  "]
-["ask   not   what","your country can","do  for  you ask","what  you can do","for your country"]
-
-
-["ask   not   what","your country can","do  for  you ask","what you can do","for your country"]
-["ask   not   what","your country can","do  for  you ask","what  you can do","for your country"]
-
-"""

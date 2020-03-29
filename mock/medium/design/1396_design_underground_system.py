@@ -54,6 +54,34 @@ Answers within 10^-5 of the actual value will be accepted as correct.
 
 """
 
+from collections import defaultdict
+class UndergroundSystem:
+    
+    def __init__(self):
+        self.checkin = {}
+        self.hs = defaultdict(dict)
+        
+    def checkIn(self, id, s_station, st):
+        self.checkin[id] = (s_station, st)
+        
+    def checkOut(self, id, e_station, et):
+        s_station, st = self.checkin[id]
+        elapsed_t = et - st
+
+        if s_station not in self.hs:
+            self.hs[s_station][e_station] = (1, elapsed_t)
+        else:
+            if e_station not in self.hs[s_station]:
+                self.hs[s_station][e_station] = (1, elapsed_t)
+            else:
+                cnt, t = self.hs[s_station][e_station]
+                self.hs[s_station][e_station] = (cnt+1, t+elapsed_t)
+            
+    def getAverageTime(self, s_station, e_station):
+        count, elapsed_t = self.hs[s_station][e_station]
+        return elapsed_t / count
+
+
 class UndergroundSystem:
     
     def __init__(self):

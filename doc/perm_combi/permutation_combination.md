@@ -21,5 +21,6 @@ In our example the order of the digits were important, if the order didn't matte
 
 ```
 C(n,r) = n! / (n-r)!r!
+```
 
 https://www.mathplanet.com/education/algebra-2/discrete-mathematics-and-probability/permutations-and-combinations
